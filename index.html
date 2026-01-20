@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live TV Player</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <style>
+        body { 
+            background: #000; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            overflow: hidden; 
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        #player { 
+            display: none; 
+            width: 100%; 
+            max-width: 100%; 
+            height: auto; 
+            aspect-ratio: 16 / 9; 
+            background: #000; 
+        }
+        #player iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #start-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 10;
+        }
+        #ad-message {
+            display: none;
+            padding: 20px;
+        }
+        #server-cost-msg {
+            margin-top: 50px; 
+            font-size: 14px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div id="ads-screen">
+    <button id="start-btn" onclick="startApp()">Click here to watch Live TV</button>
+    <div id="server-cost-msg">These ads are to cover our server costs</div>
+</div>
+
+<div id="player"></div>
+
+<div id="ad-message">
+    <h2>Ad Blocker Detected!</h2>
+    <p>Please disable your Ad Blocker for this website and refresh the page to continue.</p>
+</div>
+
+<script>
+    // Ad blocker detection
+    let adBlockEnabled = false;
+    const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+    
+    fetch(googleAdUrl, { method: 'HEAD', mode: 'no-cors' })
+    .then(() => {
+        adBlockEnabled = false;
+    })
+    .catch(() => {
+        adBlockEnabled = true;
+        document.getElementById('ads-screen').style.display = 'none';
+        document.getElementById('ad-message').style.display = 'block';
+    });
+
+    function startApp() {
+        if (adBlockEnabled) return;
+
+        document.getElementById('ads-screen').style.display = 'none';
+        document.getElementById('player').style.display = 'block';
+
+        // Ads විවෘත කිරීම
+        window.open("https://www.effectivegatecpm.com/gzdt4huw9e?key=dfc124f9ac3df1aacb231383657ec1cc", "_blank");
+        window.open("https://www.effectivegatecpm.com/kwnknce31a?key=844578f420f4d61ec5111c64452c833f", "_blank");
+        window.open("https://www.effectivegatecpm.com/dg3qvhzd?key=fff4b6a1bac1515ce8745b83683308fd", "_blank");
+        window.open("https://www.effectivegatecpm.com/catp6hxc?key=cdc419bda1c1eb2b33e06fc7cd1ffd74", "_blank");
+
+        // නව PHP API ලින්ක් එක මෙතැනට ඇතුළත් කර ඇත
+        const playerDiv = document.getElementById('player');
+        const phpUrl = "https://s1.v5on.site/CRICHD/api.php?match_id=willowusa"; 
+        
+        // ප්ලේයර් එක ඇතුළත Iframe එකක් ලෙස PHP ලින්ක් එක පෙන්වීම
+        playerDiv.innerHTML = `<iframe src="${phpUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    }
+</script>
+</body>
+</html>
